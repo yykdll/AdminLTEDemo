@@ -1,0 +1,78 @@
+﻿@model AdminLTE.Domain.Menu
+@{
+    ViewBag.Title = "编辑菜单";
+    Layout = "~/Views/Shared/_LayoutClean.cshtml";
+    var Permissions = ViewBag.Permissions as List<EnumExtensions.EnumItem>;
+}
+@using (Ajax.BeginForm("Save", "MenuManage", new AjaxOptions { HttpMethod = "Post", OnSuccess = "doSuccess" }, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.ParentID)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "请输入菜单名称" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.Url, new { @class = "form-control", placeholder = "请输入菜单链接地址(示例:/home/index?id=1)" })
+            @Html.ValidationMessageFor(m => m.Url)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.AllowPermissions, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-sm-10">
+            @foreach (var item in Permissions)
+            {
+                <label><input name="AllowPermissions" type="checkbox" class="flat-red" value="@item.IntValue" @Html.Raw(item.IntValue.IntPare(Model.AllowPermissions) ? "checked='checked'" : "") /> @item.Description</label>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsEnable, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-sm-10">
+            @Html.CheckBox(model => model.IsEnable, "", new { @class = "flat-red" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrderID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(m => m.OrderID, new { @class = "form-control", placeholder = "请输入菜单顺序" })
+            @Html.ValidationMessageFor(m => m.OrderID)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">保存</button>
+        </div>
+    </div>
+}
+@section scripts
+{
+    @Html.RenderScripts(ScriptFiles.JqueryValidate)
+    <script type="text/javascript">
+        function doSuccess(data) {
+            var index=layer.alert(data.Message,
+                {
+                    yes: function () {
+                        if (data.Status == 200) {
+                            window.parent.location.reload();
+                        } else {
+                            layer.close(index);
+                        }
+
+                } }
+        );
+
+    }
+        //checkbox样式使用icheck优化
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+    </script>
+
+}

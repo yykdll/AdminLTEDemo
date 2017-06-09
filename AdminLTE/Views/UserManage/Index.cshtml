@@ -1,0 +1,204 @@
+﻿@using AdminLTE.Helper
+@model List<AdminLTE.Domain.Employee>
+@{
+    var loginInfo = AdminLTE.Helper.LoginInfoHelper.Current();
+        bool canEdit = Html.CheckRole(AdminLTE.Enum.PermissionType.Edit);
+        bool canCreate = Html.CheckRole(AdminLTE.Enum.PermissionType.Create);
+        bool canDelete = Html.CheckRole(AdminLTE.Enum.PermissionType.Delete); 
+    }
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                用户管理
+                @*<small>Version 2.0</small>*@
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">用户列表</h3>
+                        </div>
+                        <div class="box-body">
+                            @if (canCreate)
+                            {
+                                <button type="button" id="btnAdd" class="btn  btn-success"><i class="fa fa-plus"></i> 添加用户</button>
+                            }
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%;">姓名</th>
+                                        <th style="width: 10%;">登录名</th>
+                                        <th style="width: 10%;">密码</th>
+                                        <th style="width: 10%;">是否超管</th>
+                                        <th style="width: 15%;">创建时间</th>
+                                        <th style="width: 15%;">最后登录时间</th>
+                                        <th style="width: 25%;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Count > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.UserName</td>
+                                                <td>
+                                                    @item.LoginName
+                                                </td>
+                                                <td>@item.LoginPassword</td>
+                                                <td>@item.IsAdmin.ToShiFou()</td>
+                                                <td>@item.CreateTime</td>
+                                                <td> @item.LastLoginTime</td>
+                                                <td>
+                                                    @if(loginInfo.IsAdmin||!item.IsAdmin.GetValueOrDefault(false))//非超级管理员不能编辑超级管理员
+                                                    { 
+                                                    if (canEdit)
+                                                    {
+
+                                                        <button class="btn btn-primary btn_edit" userid="@item.ID"><i class="fa fa-edit"></i> 编辑</button>
+                                                    
+                                                    }
+                                                    if (canDelete)
+                                                    {
+
+                                                        <button class="btn btn-danger btn_delete" userid="@item.ID"><i class="fa fa-trash-o"></i> 删除</button>
+
+                                                    }
+                                                    if (canEdit)
+                                                    {
+                                                        if (!item.IsDisabled.GetValueOrDefault(false))
+                                                        {
+                                                            <button class="btn btn-warning btn_disable" userid="@item.ID"><i class="fa fa-minus-circle"></i> 禁用</button>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button class="btn btn-success btn_enable" userid="@item.ID"><i class="fa  fa-check"></i> 启用</button>
+                                                        }
+                                                        <button class="btn btn-info btn_permission" userid="@item.ID"><i class="fa fa-send-o"></i> 权限</button>
+                                                    }
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    @section scripts{
+        <script type="text/javascript">
+    $("#btnAdd").click(function () {
+        layer.open({
+            type: 2,
+            title: "添加用户",
+            skin: 'layui-layer-rim', //加上边框
+            area: ['620px', '540px'], //宽高
+            content: "@Url.Action("Edit","UserManage")"
+        });
+    });
+
+    $(".btn_edit")
+        .click(function () {
+            layer.open({
+                type: 2,
+                title: "编辑用户",
+                skin: 'layui-layer-rim', //加上边框
+                area: ['620px', '540px'], //宽高
+                content: "@Url.Action("Edit", "UserManage")" + "?ID=" + $(this).attr("userid")
+            });
+        });
+
+    $(".btn_delete")
+        .click(function () {
+            var userID = $(this).attr("userid");
+            layer.confirm("是否确认删除？",
+                function () {
+                    $.post("@Url.Action("Delete", "UserManage")",
+                                { ID: userID },
+                                function (data) {
+                                    var index = layer.alert(data.Message,
+                                    {
+                                        yes: function () {
+                                            if (data.Status == 200) {
+                                                window.location.reload();
+                                            }
+                                            else {
+                                                layer.close(index);
+                                            }
+                                        }
+                                    });
+                                });
+                });
+
+        });
+    $(".btn_disable")
+        .click(function () {
+            var userID = $(this).attr("userid");
+            layer.confirm("是否确认禁用？",
+                function () {
+                    $.post("@Url.Action("Disable", "UserManage")",
+                                { ID: userID },
+                                function (data) {
+                                    var index = layer.alert(data.Message,
+                                    {
+                                        yes: function () {
+                                            if (data.Status == 200) {
+                                                window.location.reload();
+                                            }
+                                            else {
+                                                layer.close(index);
+                                            }
+                                        }
+                                    });
+                                });
+                        });
+
+                });
+
+            $(".btn_enable")
+                .click(function () {
+                    var userID = $(this).attr("userid");
+                    layer.confirm("是否确认禁用？",
+                        function () {
+                            $.post("@Url.Action("Enable", "UserManage")",
+                                { ID: userID },
+                                function (data) {
+                                    var index = layer.alert(data.Message,
+                                    {
+                                        yes: function () {
+                                            if (data.Status == 200) {
+                                                window.location.reload();
+                                            }
+                                            else {
+                                                layer.close(index);
+                                            }
+                                        }
+                                    });
+                                });
+                        });
+
+                });
+
+            $(".btn_permission").click(function () {
+                layer.open({
+                    type: 2,
+                    title: "编辑权限",
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['620px', '640px'], //宽高
+                    content: "@Url.Action("EditPermission","UserManage")" + "?userID=" + $(this).attr("userid")
+        });
+    });
+        </script>
+    }

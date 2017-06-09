@@ -1,0 +1,93 @@
+﻿@model AdminLTE.Models.Login
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @Html.RenderStyles(StyleFiles.Bootstrap, StyleFiles.FontAwesome, StyleFiles.Ionicons, StyleFiles.ICheck, StyleFiles.AdminLTE,StyleFiles.Style)
+
+    <!--[if lt IE 9]>
+    @Html.RenderScripts(ScriptFiles.Html5shiv,ScriptFiles.Respond)
+    <![endif]-->
+
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="@Url.Action("Index","Home")"><b>Admin</b>LTE</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">登录管理系统</p>
+            @using (Ajax.BeginForm("Login", "Login", new AjaxOptions { HttpMethod = "Post", OnSuccess = "doSuccess" }, new { @class = "form-horizontal", @role = "form" }))
+            {
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(m => m.LoginName, new { @class = "form-control", @placeholder = "请输入用户名" })
+                    <span class="glyphicon glyphicon-user form-control-feedback" for="LoginName"></span>
+                    @Html.ValidationMessageFor(m => m.LoginName)
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(m => m.LoginPassword, new { @class = "form-control", @placeholder = "请输入密码" })
+                    <span class="glyphicon glyphicon-lock form-control-feedback" for="LoginPassword"></span>
+                    @Html.ValidationMessageFor(m => m.LoginPassword)
+                </div>
+                <div class="form-group has-feedback">
+                    <div class="input-group">
+                        @Html.TextBoxFor(m => m.ValidateCode, new { @class = "form-control", @placeholder = "请输入验证码" })
+                        <div class="input-group-addon" style="padding:0;overflow:hidden;border-style:none;">
+                            <img id="vcodeImg" width="100" height="34" alt="验证码" onclick="javascript: changeValidateCode(this);" />
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ValidateCode)
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 col-xs-push-4">
+                        <input type="hidden" name="ReturnUrl" id="ReturnUrl" value="@(Request.QueryString["ReturnUrl"])" />
+                        <button type="submit" class="btn btn-success btn-block btn-flat" data-loading-text="正在登录...">登录</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+@Html.RenderScripts(ScriptFiles.Jquery, ScriptFiles.Bootstrap, ScriptFiles.ICheck, ScriptFiles.JqueryValidate,ScriptFiles.Layer,ScriptFiles.JqueryVcode,ScriptFiles.Common)
+<script type="text/javascript">
+        function doSuccess(data) {
+            if (data.Status == 200) {
+                layer.msg("登录成功！");
+                if ($("#ReturnUrl").val() == "" || $("#ReturnUrl").val() == undefined)
+                    {
+                    window.location.href = "/";
+                } else {
+                    window.location.href = $("#ReturnUrl").val();
+                }
+            } else {
+                layer.msg(data.Message);
+                $("#vcodeImg").vcode();
+            }
+        }
+    </script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+        $("#vcodeImg").vcode();//初始化验证码
+
+    
+    });
+    //改变验证码
+    function changeValidateCode(img) {
+        img.vcode();
+    }
+
+</script>
+
+</body>
+</html>

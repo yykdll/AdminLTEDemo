@@ -1,0 +1,87 @@
+﻿@model AdminLTE.Domain.Employee
+@{
+    ViewBag.Title = "编辑权限";
+    Layout = "~/Views/Shared/_LayoutClean.cshtml";
+    var menus = ViewBag.Menus as List<AdminLTE.Domain.MenuCacheModel>;
+    var Permissions = ViewBag.Permissions as List<AdminLTE.Domain.Permission>;
+    var PermissionPoints = ViewBag.PermissionPoints as List<EnumExtensions.EnumItem>;
+}
+@using (Ajax.BeginForm("SavePermission", "UserManage", new AjaxOptions { HttpMethod = "Post", OnSuccess = "doSuccess" }, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.HiddenFor(model => model.ID)
+    @Html.Hidden("PermissionJson")
+    <div class="form-group">
+        <label class="control-label col-md-2">权限勾选</label>
+        <ul class="col-md-10 list-group">
+            @foreach (var root in menus)
+            {
+                <li class="list-group-item">
+                    <label>@root.Name</label>
+                    <ul class="list-group">
+                        @foreach (var item in root.Children)
+                        {
+                            var permission = Permissions.SingleAndInit(s => s.MenuID == item.ID);
+                            <li mid="@item.ID" class="list-group-item">
+                                <span>@item.Name</span>
+                                @foreach (var point in PermissionPoints.Where(s => s.IntValue.IntPare(item.Permissions)))
+                                {
+                                    <label><input type="checkbox" class="flat-red" value="@point.IntValue" @Html.Raw(point.IntValue.IntPare(permission.Permissions) ? "checked=\"checked\"" : "") /> @point.Description</label>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="保存" class="btn btn-success" onclick="btnClick()" data-loading-text="正在保存..." />
+        </div>
+    </div>
+}
+@section scripts
+{
+@Html.RenderScripts(ScriptFiles.JqueryValidate)
+    <script type="text/javascript">
+        function btnClick() {
+            var menus = $("[mid]");
+            var permissions = new Array();
+            for (var i = 0; i < menus.length; i++) {
+                var item = $(menus[i]);
+                var checked = $(item).find(":checked");
+                if (checked.length > 0) {
+                    var permission = new Object();
+                    permission.Value = 0;
+                    permission.Key = (item).attr("mid");
+                    for (var j = 0; j < checked.length; j++) {
+                        permission.Value += parseInt($(checked[j]).val());
+                    }
+                    permissions.push(permission);
+                }
+            }
+            $("#PermissionJson").val(JSON.stringify(permissions));
+        }
+        function doSuccess(data) {
+            var index=layer.alert(data.Message,
+                {
+                    yes: function () {
+                        if (data.Status == 200) {
+                            window.parent.location.reload();
+                        } else {
+                            layer.close(index);
+                        }
+
+                    } }
+            );
+
+        }
+
+        //checkbox样式使用icheck优化
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+    </script>
+
+}

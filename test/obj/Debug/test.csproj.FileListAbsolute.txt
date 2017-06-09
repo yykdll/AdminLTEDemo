@@ -1,0 +1,6 @@
+E:\测试demo\AdminLTEDemo\test\bin\Debug\test.dll
+E:\测试demo\AdminLTEDemo\test\bin\Debug\test.pdb
+E:\测试demo\AdminLTEDemo\test\bin\Debug\MvcCore-cleaned.dll
+E:\测试demo\AdminLTEDemo\test\obj\Debug\test.csprojResolveAssemblyReference.cache
+E:\测试demo\AdminLTEDemo\test\obj\Debug\test.dll
+E:\测试demo\AdminLTEDemo\test\obj\Debug\test.pdb
