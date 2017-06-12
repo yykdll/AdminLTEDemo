@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web.Mvc;
 using AdminLTE.Domain;
 using AdminLTE.Domain.Services;
+using AdminLTE.Enum;
+using AdminLTE.Filter;
 using AdminLTE.Helper;
 using MvcBase.Controls;
 
@@ -28,6 +30,7 @@ namespace AdminLTE.Controllers
         /// 列表
         /// </summary>
         /// <returns></returns>
+        [PermissionValidate(PermissionType.Index)]
         public ActionResult Index()
         {
             var list_employee = _employeeService.ListAllEmployees();
@@ -38,6 +41,7 @@ namespace AdminLTE.Controllers
         /// 添加或者编辑用户
         /// </summary>
         /// <returns></returns>
+        [PermissionValidate(PermissionType.Create,PermissionType.Edit)]
         public ActionResult Edit(string id)
         {
             var o_employee = _employeeService.SingleAndInit(id);
@@ -49,6 +53,7 @@ namespace AdminLTE.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [PermissionValidate(PermissionType.Create, PermissionType.Edit)]
         public ActionResult Save(string id)
         {
             ReturnResult result = new ReturnResult();
@@ -74,6 +79,7 @@ namespace AdminLTE.Controllers
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpPost]
+        [PermissionValidate(PermissionType.Delete)]
         public JsonResult Delete(string ID)
         {
             ReturnResult result = new ReturnResult();
@@ -106,6 +112,7 @@ namespace AdminLTE.Controllers
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpPost]
+        [PermissionValidate(PermissionType.Edit)]
         public JsonResult Disable(string ID)
         {
             ReturnResult result = new ReturnResult();
@@ -144,6 +151,7 @@ namespace AdminLTE.Controllers
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpPost]
+        [PermissionValidate(PermissionType.Edit)]
         public JsonResult Enable(string ID)
         {
             ReturnResult result = new ReturnResult();
@@ -180,6 +188,7 @@ namespace AdminLTE.Controllers
         /// 编辑权限
         /// </summary>
         /// <returns></returns>
+        [PermissionValidate(PermissionType.Edit)]
         public ActionResult EditPermission(string userID)
         {
             var o_employee = _employeeService.Single(userID);
@@ -233,6 +242,7 @@ namespace AdminLTE.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [PermissionValidate(PermissionType.Edit)]
         public JsonResult SavePermission(string ID, string PermissionJson)
         {
 

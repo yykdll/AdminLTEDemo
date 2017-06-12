@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AdminLTE.Domain.Services;
 using AdminLTE.Enum;
+using AdminLTE.Filter;
 using MvcBase.Controls;
 
 namespace AdminLTE.Controllers
@@ -21,6 +22,7 @@ namespace AdminLTE.Controllers
             this._dbTool = dbTool;
             this._permissionService = permissionService;
         }
+        [PermissionValidate(PermissionType.Index)]
         public ActionResult Index()
         {
             var list = _menuService
@@ -33,6 +35,7 @@ namespace AdminLTE.Controllers
         /// 添加或者编辑菜单
         /// </summary>
         /// <returns></returns>
+        [PermissionValidate(PermissionType.Create,PermissionType.Edit)]
         public ActionResult Edit(string ID, string parentID)
         {
             var o_menu = _menuService.SingleAndInit(ID);
@@ -49,6 +52,7 @@ namespace AdminLTE.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [PermissionValidate(PermissionType.Edit,PermissionType.Create)]
         public ActionResult Save(string id)
         {
             ReturnResult result = new ReturnResult();
@@ -79,6 +83,7 @@ namespace AdminLTE.Controllers
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpPost]
+        [PermissionValidate(PermissionType.Delete)]
         public JsonResult Delete(string ID)
         {
             ReturnResult result = new ReturnResult();

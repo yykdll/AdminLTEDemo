@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using AdminLTE.Domain;
 using AdminLTE.Domain.Services;
+using AdminLTE.Enum;
+using AdminLTE.Filter;
 
 namespace AdminLTE.Controllers
 {
@@ -18,7 +20,7 @@ namespace AdminLTE.Controllers
             this._employeeService = employeeService;
             this._dbTool = dbTool;
         }
-
+        [PermissionValidate(PermissionType.Index)]
         public ActionResult Index()
         {
             return View();

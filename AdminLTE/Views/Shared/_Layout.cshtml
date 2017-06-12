@@ -196,7 +196,12 @@
 
                     @foreach (var root in menus.Where(s => loginInfo.MenuIDs.Contains(s.ID) || loginInfo.IsAdmin))
                     {
-                        <li class="treeview">
+                        <li class="treeview @foreach (var item in root.Children.Where(s => loginInfo.MenuIDs.Contains(s.ID) || loginInfo.IsAdmin))
+                                            {
+                                                if(Request.Url.ToString().ToLower().Contains(item.Url.ToLower()))
+                                                {
+                                                <text>active</text>
+                                                }}">
                             <a href="#">
                                 <i class="fa fa-dashboard"></i>
                                 <span>@(root.Name)</span>
@@ -207,7 +212,7 @@
                             <ul class="treeview-menu">
                                 @foreach (var item in root.Children.Where(s => loginInfo.MenuIDs.Contains(s.ID) || loginInfo.IsAdmin))
                                 {
-                                    <li><a href="@(item.Url)"><i class="fa fa-circle-o"></i>@item.Name</a></li>
+                                    <li @Html.Raw(Request.Url.ToString().ToLower().Contains(item.Url.ToLower()) ? "class='active'" : "")><a href="@(item.Url)"><i class="fa fa-circle-o"></i>@item.Name</a></li>
                                 }
                             </ul>
                         </li>

@@ -170,7 +170,7 @@
             $(".btn_enable")
                 .click(function () {
                     var userID = $(this).attr("userid");
-                    layer.confirm("是否确认禁用？",
+                    layer.confirm("是否确认启用？",
                         function () {
                             $.post("@Url.Action("Enable", "UserManage")",
                                 { ID: userID },

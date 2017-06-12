@@ -160,6 +160,7 @@
     <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Enum\PermissionType.cs" />
     <Compile Include="Filter\AuthorityLoginAttribute.cs" />
+    <Compile Include="Filter\PermissionValidateAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

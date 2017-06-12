@@ -46,3 +46,4 @@ E:\测试demo\AdminLTEDemo\MvcBase\bin\Debug\zh-Hans\System.Web.WebPages.Deploym
 E:\测试demo\AdminLTEDemo\MvcBase\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resources.dll
 E:\测试demo\AdminLTEDemo\MvcBase\obj\Debug\MvcBase.dll
 E:\测试demo\AdminLTEDemo\MvcBase\obj\Debug\MvcBase.pdb
+E:\测试demo\AdminLTEDemo\MvcBase\obj\Debug\MvcBase.csprojResolveAssemblyReference.cache
