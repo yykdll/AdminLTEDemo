@@ -8,7 +8,7 @@ using AdminLTE.Domain.Services;
 
 namespace AdminLTE.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IMainDBTool _dbTool;
         private IEmployeeService _employeeService;

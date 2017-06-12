@@ -9,7 +9,7 @@ using MvcBase.Controls;
 
 namespace AdminLTE.Controllers
 {
-    public class UserManageController : Controller
+    public class UserManageController : BaseController
     {
         private readonly IMainDBTool _dbTool;
         private readonly IEmployeeService _employeeService;

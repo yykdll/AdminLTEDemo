@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using AdminLTE.Domain.Services;
 using AdminLTE.Helper;
 using MvcBase.Controls;
@@ -95,7 +96,7 @@ namespace AdminLTE.Controllers
         public ActionResult Logout()
         {
             LoginInfoHelper.Logout();
-            return Redirect("/login/index");
+            return Redirect(FormsAuthentication.LoginUrl);
         }
     }
 }

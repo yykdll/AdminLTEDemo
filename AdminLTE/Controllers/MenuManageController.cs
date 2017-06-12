@@ -9,7 +9,7 @@ using MvcBase.Controls;
 
 namespace AdminLTE.Controllers
 {
-    public class MenuManageController : Controller
+    public class MenuManageController : BaseController
     {
         private readonly IMainDBTool _dbTool;
         private readonly IMenuService _menuService;

@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuManageController.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Enum\PermissionType.cs" />
+    <Compile Include="Filter\AuthorityLoginAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1081,6 +1083,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Permission\" />
     <Folder Include="Views\Public\" />
   </ItemGroup>

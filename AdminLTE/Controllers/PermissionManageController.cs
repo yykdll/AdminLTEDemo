@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AdminLTE.Controllers
 {
-    public class PermissionManageController : Controller
+    public class PermissionManageController : BaseController
     {
         // GET: Permission
         public ActionResult Index()

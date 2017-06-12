@@ -145,6 +145,7 @@ namespace AdminLTE.Helper
 
         public static LoginInfo LoginInfo(string ID)
         {
+
             string key = LoginCacheName + ID;
             //if (!System.Web.HttpContext.Current.Request.Headers.AllKeys.Contains(key))
             //{
@@ -168,7 +169,7 @@ namespace AdminLTE.Helper
                 if (employee == null || employee.IsDisabled.GetValueOrDefault(false))
                 {
                     Logout();
-                    throw new UnauthorizedAccessException("用户信息失效！");
+                    return null;
                 }
                 employee.ToLoginInfo().SetCache();
             }
