@@ -155,7 +155,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuManageController.cs" />
-    <Compile Include="Controllers\PermissionManageController.cs" />
     <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Enum\PermissionType.cs" />
