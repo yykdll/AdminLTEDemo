@@ -126,7 +126,7 @@ namespace AdminLTE.Domain
                         {
                             ID = s.ID,
                             Name = s.Name,
-                            Permissions = s.AllowPermissions,
+                            //Permissions = s.AllowPermissions,
                             Url=s.Url,
                             Children = new List<MenuCacheModel>()
                         }).ToList();

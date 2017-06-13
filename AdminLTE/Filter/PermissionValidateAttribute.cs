@@ -10,7 +10,7 @@ namespace AdminLTE.Filter
     public class PermissionValidateAttribute : ActionFilterAttribute, IActionFilter
     {
         public Enum.PermissionType[] Permission { get; set; }
-        public PermissionValidateAttribute(params Enum.PermissionType[] Role) { this.Permission = Permission; }
+        public PermissionValidateAttribute(params Enum.PermissionType[] Permission) { this.Permission = Permission; }
 
         public override void OnActionExecuting(System.Web.Mvc.ActionExecutingContext filterContext)
         {
@@ -38,10 +38,11 @@ namespace AdminLTE.Filter
                 }
                 else
                 {
-                    if (filterContext.HttpContext.Request.UrlReferrer != null)
-                        filterContext.Result = new RedirectResult(filterContext.HttpContext.Request.UrlReferrer.ToString());
-                    else
-                        filterContext.Result = new RedirectResult("/");
+                    //if (filterContext.HttpContext.Request.UrlReferrer != null)
+                    //    filterContext.Result = new RedirectResult(filterContext.HttpContext.Request.UrlReferrer.ToString());
+                    //else
+                    //    filterContext.Result = new RedirectResult("/");
+                    filterContext.Result = new RedirectResult("/public/error?message=权限不足");
                 }
             }
 

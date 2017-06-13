@@ -14,5 +14,11 @@ namespace AdminLTE.Controllers
             Session["ValidateCode"] = code;
             return File(ValidateWhiteBlackImgCode.Img(code, w ?? 200, h ?? 75), "image/png");
         }
+
+        public ActionResult Error(string message)
+        {
+            ViewBag.Message = message;
+            return View();
+        }
     }
 }

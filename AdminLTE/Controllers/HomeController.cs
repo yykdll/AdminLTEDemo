@@ -20,7 +20,6 @@ namespace AdminLTE.Controllers
             this._employeeService = employeeService;
             this._dbTool = dbTool;
         }
-        [PermissionValidate(PermissionType.Index)]
         public ActionResult Index()
         {
             return View();

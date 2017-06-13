@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Security;
 using AdminLTE.Domain;
 using AdminLTE.Domain.Services;
+using MvcBase;
 using MvcBase.Enum;
 using MvcBase.Helper;
 
@@ -131,6 +132,7 @@ namespace AdminLTE.Helper
         {
             var id = HttpContext.Current.User.Identity.Name.ToGuid();
             CacheExtensions.ClearCache(LoginCacheName + id);
+            Unity.Get<IMenuService>().ClearCache();
             FormsAuthentication.SignOut();
         }
         public static List<LoginInfo> LoginInfo()

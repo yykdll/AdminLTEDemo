@@ -1085,7 +1085,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Permission\" />
-    <Folder Include="Views\Public\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1212,6 +1211,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\UserManage\EditPermission.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Public\Error.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
