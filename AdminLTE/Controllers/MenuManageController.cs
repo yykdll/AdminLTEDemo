@@ -55,7 +55,9 @@ namespace AdminLTE.Controllers
         [PermissionValidate(PermissionType.Edit,PermissionType.Create)]
         public ActionResult Save(string id)
         {
-            ReturnResult result = new ReturnResult();
+                        ReturnResult result = new ReturnResult();
+            if(ModelState.IsValid)
+            {
             try
             {
                 var o_menu = _menuService.SingleAndInit(id);
@@ -73,6 +75,12 @@ namespace AdminLTE.Controllers
             catch (Exception ex)
             {
                 result.Message = ex.ToString();
+            }
+                }
+            else
+            {
+                result.Status = 500;
+                result.Message = "保存失败!";
             }
             return Json(result);
         }
@@ -110,6 +118,18 @@ namespace AdminLTE.Controllers
                 result.Message = ex.ToString();
             }
             return Json(result);
+        }
+
+        public JsonResult IsURLNullorEmpty(string URL,string ParentID)
+        {
+            if (ParentID == null || ParentID == "0" || !string.IsNullOrEmpty(URL))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("链接地址不能为空！", JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

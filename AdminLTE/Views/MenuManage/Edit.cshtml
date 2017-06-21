@@ -9,22 +9,24 @@
     @Html.HiddenFor(model => model.ID)
     @Html.HiddenFor(model => model.ParentID)
     <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label col-md-2"})
+        <span style="color: red;">*</span>
         <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "请输入菜单名称" })
+            @Html.TextBoxFor(m => m.Name, new {@class = "form-control", placeholder = "请输入菜单名称"})
             @Html.ValidationMessageFor(m => m.Name)
         </div>
     </div>
         if (Model.ParentID != null && Model.ParentID != "0")
     { 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.Url, new { @class = "form-control", placeholder = "请输入菜单链接地址(示例:/home/index?id=1)" })
-            @Html.ValidationMessageFor(m => m.Url)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Url, htmlAttributes: new {@class = "control-label col-md-2"})
+            <span style="color: red;">*</span>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Url, new {@class = "form-control", placeholder = "请输入菜单链接地址(示例:/home/index?id=1)"})
+                @Html.ValidationMessageFor(m => m.Url)
+            </div>
         </div>
-}
-    </div>
+    }
     if (Model.ParentID != null && Model.ParentID != "0")
     { 
         <div class="form-group">

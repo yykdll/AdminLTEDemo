@@ -17,7 +17,7 @@
     <div class="form-group">
         <label for="LoginName" class="col-md-2 control-label">登录名</label>
         <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.LoginName, new { @class = "form-control", placeholder = "请输入登录名" })
+            @Html.TextBoxFor(m => m.LoginName, new {@class = "form-control", placeholder = "请输入登录名"})
             @Html.ValidationMessageFor(m => m.LoginName)
         </div>
     </div>

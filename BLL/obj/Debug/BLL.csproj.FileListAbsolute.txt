@@ -45,3 +45,9 @@ E:\测试demo\AdminLTEDemo\BLL\bin\Debug\zh-Hans\System.Web.WebPages.Deployment.
 E:\测试demo\AdminLTEDemo\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 E:\测试demo\AdminLTEDemo\BLL\obj\Debug\BLL.dll
 E:\测试demo\AdminLTEDemo\BLL\obj\Debug\BLL.pdb
+E:\测试demo\AdminLTEDemo\BLL\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\测试demo\AdminLTEDemo\BLL\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\测试demo\AdminLTEDemo\BLL\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\测试demo\AdminLTEDemo\BLL\bin\Debug\System.Web.Helpers.dll
+E:\测试demo\AdminLTEDemo\BLL\bin\Debug\System.Web.Helpers.xml
+E:\测试demo\AdminLTEDemo\BLL\bin\Debug\zh-Hans\System.Web.Helpers.resources.dll

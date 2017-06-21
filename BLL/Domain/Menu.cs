@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting;
+using System.Web.Mvc;
 using MvcBase.Infrastructure;
 
 namespace AdminLTE.Domain
@@ -47,8 +49,8 @@ namespace AdminLTE.Domain
         /// </summary>
         [DisplayName("链接地址")]
         [Column("URL")]
-        [Required(ErrorMessage = "链接地址不可为空")]
         [MaxLength(100, ErrorMessage = "链接地址不能超过100个字")]
+        [Remote("IsURLNullorEmpty", "MenuManage")]
         public string Url { get; set; }
         /// <summary>
         /// 允许的权限

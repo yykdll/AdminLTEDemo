@@ -16,3 +16,8 @@ label.error {
     padding-left: 6px;
     color: red;
 }
+/*登录页背景图*/
+.bg-tec {
+    background: url("/Content/image/bg3.jpg") no-repeat;
+    background-size: 100%;
+}

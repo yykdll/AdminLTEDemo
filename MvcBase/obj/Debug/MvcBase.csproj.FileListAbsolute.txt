@@ -47,3 +47,5 @@ E:\测试demo\AdminLTEDemo\MvcBase\bin\Debug\zh-Hans\System.Web.WebPages.Razor.r
 E:\测试demo\AdminLTEDemo\MvcBase\obj\Debug\MvcBase.dll
 E:\测试demo\AdminLTEDemo\MvcBase\obj\Debug\MvcBase.pdb
 E:\测试demo\AdminLTEDemo\MvcBase\obj\Debug\MvcBase.csprojResolveAssemblyReference.cache
+E:\测试demo\AdminLTEDemo\MvcBase\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\测试demo\AdminLTEDemo\MvcBase\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
